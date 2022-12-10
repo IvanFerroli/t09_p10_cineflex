@@ -13,8 +13,8 @@ function App() {
 			<Routes>
 				{/* Cada rota tem que estar em Route */}
 				<Route path="/" element={<Home />} />
-				<Route path="sessions" element={<Sessions />} />
-        <Route path="seats" element={<Seats />} />
+				<Route path="sessoes" element={<Sessions />} />
+        <Route path="assentos" element={<Seats />} />
 			</Routes>
 		</BrowserRouter>
 	);
