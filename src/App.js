@@ -1,9 +1,23 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./components/Home";
+import Sessions from "./components/Sessions";
+import Seats from "./components/Seats";
+
+
 function App() {
-  return (
-    <>
-    <h1>OOOOOOOOOOOOOOOOOOOOORRAAAAAAA</h1>
-    </>
-  );
+	return (
+		//Colocar todo App entre BrowerRouter
+		<BrowserRouter>
+			{/* Tudo que tiver uma rota entre Routes */}
+			<Routes>
+				{/* Cada rota tem que estar em Route */}
+				<Route path="/" element={<Home />} />
+				<Route path="sessions" element={<Sessions />} />
+        <Route path="seats" element={<Seats />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
