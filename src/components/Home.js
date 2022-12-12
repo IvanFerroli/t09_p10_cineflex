@@ -4,22 +4,21 @@ import axios from 'axios';
 import loading from "../assets/img/loading.gif";
 
 export default function Home() {
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(undefined);
 
 	useEffect(() => {
-		const requisicao = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
+		const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
 
-		requisicao.then(resposta => {
-            console.log(resposta.data, "isso é o que tá vindo no get");
-			setMovies(resposta.data);
+		promise.then(res => {
+			setMovies(res.data);
 		});
+        promise.catch((err) => console.log(err.response.data));
 	}, []);
 
-	if(movies === []) {
+	if(movies === undefined) {
 		return <img src={loading} alt="Loading" />;
-	}else{
-        console.log(movies);
-    }
+	} 
+
     return(
         <ul>
 			{movies.map(movie => <Link to={`sessoes/${movie.id}`}>
