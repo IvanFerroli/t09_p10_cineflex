@@ -4,88 +4,55 @@ import axios from "axios";
 import loading from "../assets/img/loading.gif";
 import styled from "styled-components"
 
+import Footer from "../components/Footer"
+import SessionCard from "../components/SessionCard"
+import { textColor } from "../constants/colors"
+import { BASE_URL } from "../constants/urls"
+
 
 export default function Sessions() {
 	const { movieId } = useParams()
 	const [sessions, setSessions] = useState(undefined);
+	const [movie, setMovie] = useState(undefined)
 	
 	useEffect(() => {
 		const promise = axios.get(
 			`https://mock-api.driven.com.br/api/v8/cineflex/movies/${movieId}/showtimes`
 		);
-		promise.then((res) => {setSessions(res.data)})
+		promise.then((res) => {setMovie(res.data)})
 		promise.catch((err) => console.log(err.response.data))
 	},[] );
 
-	if (sessions === undefined) {
+	if (movie === undefined) {
 		return <img src={loading} alt="Loading" />;
 	} 
+ 	
 
-	const days = sessions.days
-
-	return (
-		<div>
-			<h1>{sessions.title}</h1>
-			<img src={sessions.posterURL} alt="Poster" />
-			<h4>{sessions.overview}</h4>
-			<h2>{sessions.releaseDate}</h2>
-			<ul>
-				<div>
-					<h1>Sessões</h1>
-					{days.map((day) => (
-						<li>
-							<Link to={`assentos/${day.id}`}>
-								<h1>{day.weekday}</h1>
-								<h1>{day.date}</h1>
-								{day.showtimes.map((actualSession) => (
-									<div>
-										<h3>{actualSession.name}</h3>
-										<h3>{actualSession.id}</h3>
-									</div>
-								))}
-							</Link>
-						</li>
-					))}
-				</div>
-			</ul>
-		</div>
-	);
+return (
+	<PageContainer>
+		Selecione o horário
+		<ListContainer>
+			{movie.days.map(m => (
+				<SessionCard movie={m} key={m.id}/>
+			))}
+			
+		</ListContainer>
+		<Footer poster={movie.posterURL} title={movie.title} />
+	</PageContainer>
+)
 }
 
-
-// import axios from "axios"
-// import { useEffect, useState } from "react"
-// import { useParams } from "react-router-dom"
-// import styled from "styled-components"
-
-// export default function ImagePage() {
-//   const { imageId } = useParams()
-//   const [image, setImage] = useState(undefined)
-
-//   useEffect(() => {
-//     const promise = axios.get(`https://instructor-api.sistemas.driven.com.br/projects/shuttercamp/images/${imageId}`)
-//     promise.then((res) => setImage(res.data))
-//     promise.catch((err) => console.log(err.response.data))
-//   }, [])
-
-//   if (image === undefined) {
-//     return <div>Carregando...</div>
-//   }
-
-//   return (
-//     <div>
-//       <Wrapper>
-//         <TopSection>
-//           <Image>
-//             <img src={image.url} alt={image.name} />
-//           </Image>
-
-//           <Info>
-//             <Title>{image.name}</Title>
-//             <div>{image.description}</div>
-//           </Info>
-//         </TopSection>
-//       </Wrapper>
-//     </div>
-//   )
-// }
+const PageContainer = styled.div`
+display: flex;
+flex-direction: column;
+font-family: 'Roboto';
+font-size: 24px;
+text-align: center;
+color: ${textColor};
+margin-top: 30px;
+padding-bottom: 120px;
+padding-top: 70px;
+`
+const ListContainer = styled.div`
+margin-top: 30px;
+`
