@@ -31,7 +31,7 @@ export default function Sessions() {
 return (
 	<PageContainer>
 		Selecione o horário
-		<ListContainer>
+		<ListContainer data-test="movie-day">
 			{movie.days.map(m => (
 				<SessionCard movie={m} key={m.id}/>
 			))}

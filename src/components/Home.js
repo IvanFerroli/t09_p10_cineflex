@@ -24,7 +24,7 @@ export default function Home() {
 	return (
 		<ul>
 			{movies.map((movie) => (
-				<Link to={`sessoes/${movie.id}`} >
+				<Link to={`sessoes/${movie.id}`} data-test="movie">
 					<h1>{movie.title}</h1>
 					<img src={movie.posterURL} alt="Poster" />
 					<h4>{movie.overview}</h4>

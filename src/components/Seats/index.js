@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components"
 
 import SeatsRow from "../SeatsRow";
 import Footer from "../Footer";
@@ -137,7 +138,7 @@ export default function Seats() {
                                 </>
                             ) : <></>}
 
-                            <button type="submit">Reservar assento(s)</button>
+                            <button type="submit" data-test="book-seat-btn">Reservar assento(s)</button>
                         </form>
                     </main>
                     <Footer image={seatsInfo.movie.posterURL} title={seatsInfo.movie.title} session={`${seatsInfo.day.weekday} - ${seatsInfo.name}`} />

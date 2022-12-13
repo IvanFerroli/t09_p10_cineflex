@@ -16,6 +16,7 @@ function SeatsRow(props) {
                     names={names}
                     cpfs={cpfs}
                     setSeatsSelected={setSeatsSelected}
+                    data-test="seat"
                 />
             ))}
         </ul>

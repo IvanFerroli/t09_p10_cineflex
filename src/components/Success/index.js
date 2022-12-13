@@ -13,14 +13,14 @@ function Success() {
     return (
         <Confirmation>
             <h2>Pedido feito com sucesso!</h2>
-            <PurchaseInfo>
+            <PurchaseInfo data-test="movie-info">
                 <h3>Filme e sessão</h3>
                 <p>{movie.title}</p>
-                <p>{day.date} {seatsInfo.name}</p>
+                <p data-test="seats-info">{day.date} {seatsInfo.name}</p>
             </PurchaseInfo>
             {reservedSeats.map((seat, index) => {
                 return (
-                    <PurchaseInfo key={index}>
+                    <PurchaseInfo key={index} data-test="client-info">
                         <h3>Comprador Assento {seat % 100 > 50 ? (seat % 100 - 50) : seat % 100}</h3>
                         <p>Nome: {buyers[index].nome}</p>
                         <p>CPF: {cpfMask(buyers[index].cpf)}</p>
@@ -28,7 +28,7 @@ function Success() {
                 );
             })}
             
-            <button onClick={() => navigate("/")} >Voltar pra Home</button>
+            <button onClick={() => navigate("/")} data-test="go-home-btn">Voltar pra Home</button>
         </Confirmation>
     )
 }

@@ -9,7 +9,7 @@ export default function SessionCard({ movie }) {
             <ButtonsContainer>
                 {movie.showtimes.map((t) => (
                     <Link to={`/assentos/${t.id}`} key={t.name}>
-                        <button>{t.name}</button>
+                        <button data-test="showtime">{t.name}</button>
                     </Link>
                 ))}
             </ButtonsContainer>
